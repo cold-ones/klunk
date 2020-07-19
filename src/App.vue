@@ -7,7 +7,7 @@
 
 <script>
 import io from 'socket.io-client';
-const socket = io('192.168.43.1:3000');
+const socket = io(window.location.host+':3000');
 
 import Menu from '@/components/Menu.vue';
 import Game from '@/components/Game.vue';
