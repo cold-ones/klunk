@@ -1,7 +1,15 @@
 * {
-  text-transform: uppercase;
+  font-family: 'Helvetica', 'Arial', sans-serif;
   text-align: center;
+}
+button {
+  text-transform: uppercase;
 }
 input {
   width: 60px;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
 }
