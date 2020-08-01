@@ -23,5 +23,7 @@ build_app:
 # production stage
 production:
    stage: deploy
+   only:
+      - master
    script:
        cp -r dist/* /var/www/html/
