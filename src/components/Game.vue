@@ -109,8 +109,10 @@ export default {
       this.socket.emit("next");
     },
     send () {
-      this.socket.emit("push", this.essay);
-      this.essay = "";
+      if (this.essay.length > 0) {
+        this.socket.emit("push", this.essay);
+        this.essay = "";
+      } 
     }
   },
   watch: {
