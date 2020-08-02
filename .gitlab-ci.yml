@@ -1,33 +1,6 @@
 stages:
-   - build
-   - deploy
+   - job
 
-# build stage
-build_app:
-   image: node:alpine
-   stage: build
-   only:
-      - master
-   tags:
-      - tag
-   script:
-      - npm install
-      - npm run build
-   cache:
-     paths:
-       - node_modules/ 
-   artifacts:
-      paths:
-         # build folder
-         - dist/
-      expire_in: 1 hour
-
-# production stage
-production:
-   stage: deploy
-   only:
-      - master
-   tags:
-      - tag
-   script:
-       cp -r dist/* /var/www/html/
+job:
+    script:
+        - echo "Hello world"
