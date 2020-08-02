@@ -19,7 +19,7 @@
 <script>
 import P5 from 'p5';
 import io from "socket.io-client";
-const socket = io("155.4.60.233:3000");
+const socket = io("fredag.nu:3000");
 
 import Menu from "@/components/Menu.vue";
 import Game from "@/components/Game.vue";
