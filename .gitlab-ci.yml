@@ -1,6 +1,7 @@
 stages:
-   - job
+   - hello
 
-job:
+hw:
+    stage: hello
     script:
         - echo "Hello world"
