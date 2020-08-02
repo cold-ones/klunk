@@ -44,7 +44,7 @@ export default {
       let stop = false;
       let ebic = 0;
 
-      s.windowResized = () => { resizeCanvas(windowWidth, windowHeight); }
+      s.windowResized = () => { resizeCanvas(s.innerWidth, s.innerHeight); }
 
       s.setup = () => {
         s.createCanvas(w, h);
