@@ -9,7 +9,7 @@ build_app:
    only:
       - master
    tags:
-      - production
+      - tag
    script:
       - npm install
       - npm run build
@@ -28,6 +28,6 @@ production:
    only:
       - master
    tags:
-      - production
+      - tag
    script:
        cp -r dist/* /var/www/html/
