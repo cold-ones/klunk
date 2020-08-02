@@ -1,7 +1,27 @@
 stages:
-   - hello
+   - build
+   - deploy
 
-hw:
-    stage: hello
-    script:
-        - echo "Hello world"
+# build stage
+build_app:
+   stage: build
+   only:
+      - master
+   script:
+      - npm install
+      - npm run build
+   cache:
+     paths:
+       - node_modules/ 
+   artifacts:
+      paths:
+         - dist/
+      expire_in: 1 hour
+
+# production stage
+production:
+   stage: deploy
+   only:
+      - master
+   script:
+       cp -r dist/* /var/www/html/
