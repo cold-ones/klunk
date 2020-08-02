@@ -8,6 +8,8 @@ build_app:
    stage: build
    only:
       - master
+   tags:
+      - production
    script:
       - npm install
       - npm run build
@@ -25,5 +27,7 @@ production:
    stage: deploy
    only:
       - master
+   tags:
+      - production
    script:
        cp -r dist/* /var/www/html/
