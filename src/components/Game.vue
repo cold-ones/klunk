@@ -111,7 +111,7 @@ export default {
     send () {
       if (this.essay.length > 0) {
         this.socket.emit("push", this.essay);
-        this.essay = "";
+        this.essay = ""; // test push
       } 
     }
   },
