@@ -44,6 +44,8 @@ export default {
       let stop = false;
       let ebic = 0;
 
+      s.windowResized = () => { resizeCanvas(windowWidth, windowHeight); }
+
       s.setup = () => {
         s.createCanvas(w, h);
         s.noStroke();
