@@ -88,6 +88,7 @@ export default {
       this.$emit('question');
       setTimeout(() => {
         this.question = question;
+        this.$forceUpdate();
       }, 200);
     });
   },
