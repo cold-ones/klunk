@@ -3,7 +3,5 @@ stages:
 
 hw:
     stage: hello
-    tags:
-      - tag
     script:
         - echo "Hello world"
