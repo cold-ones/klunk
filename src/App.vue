@@ -14,7 +14,7 @@
     top: 0;
     left: 0;
   }
-  </style>
+</style>
 
 <script>
 import P5 from 'p5';
