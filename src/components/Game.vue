@@ -87,8 +87,8 @@ export default {
     this.socket.on('question', (question) => {
       this.$emit('question');
       setTimeout(() => {
-        this.question = question;
-        this.$forceUpdate();
+        this.question = "";
+        this.$nextTick(() => { this.question = question; })
       }, 200);
     });
   },
