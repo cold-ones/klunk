@@ -15,7 +15,7 @@
   h1 {
     display: inline-block;
     position: absolute;
-    left: 40px;
+    left: 5%;
     bottom: calc(45vh - 150px);
     font-size: 3em;
     font-weight: 600;
@@ -42,6 +42,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    text-align: center;
   }
 </style>
 

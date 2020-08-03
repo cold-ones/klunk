@@ -14,11 +14,13 @@
 <style scoped>
   .swipe {
     position: absolute;
-    top: 80%;
-    left: 50%;
+    padding: 0;
     width: 100vw;
+    text-align: center;
     color: rgb(16,16,16);
-    transform: translateX(-50%);
+    bottom:10%;
+    left:0;
+    transform: translateY(50%);
   }
   .centered {
     position: absolute;
@@ -37,15 +39,15 @@
     color:#fff;
   }
   .roomCode {
-    left: 30px;
-    top: 10px;
+    left: 5%;
+    top: 5%;
     color:#aaa;
   }
   .question {
     width: 90vw;
     height: 300px;
-    left: 30px;
-    top: 50px;
+    left: 5%;
+    top: calc(5% + 3rem);
     overflow-wrap: break-word;
     color: #DE38C8;
   }
