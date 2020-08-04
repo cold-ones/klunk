@@ -3,9 +3,10 @@
     <h1 class="roomCode">{{ roomCode }}</h1>
     <h1 class="question">{{ question }}</h1>
     <div class="centered">
+      <button class="close" @click="send"><img src="@/assets/close.svg"/></button>
       <textarea v-model="essay" placeholder="skriv här..."/>
       <br>
-      <button @click="send"><img src="@/assets/send.svg"/></button>
+      <button class="send" @click="send"><img src="@/assets/send.svg"/></button>
     </div>
     <h2 class="swipe" v-if="host">Swipea up för frågor.</h2>
   </div>
@@ -54,20 +55,33 @@
   }
   button {
     border: none;
-    background: #DE38C8;
     color: #fff;
     border-radius: 100%;
     width: 50px;
     height: 50px;
     position: absolute;
     right: 0;
-    transform: translate(30%, -70%);
     border: white solid 4px;
+  }
+  .send {
+    background: #DE38C8;
+    transform: translate(30%, -70%);
+  }
+  .close { 
+    background: #DE38C8;
+    transform: translate(30%, -30%);
   }
   img {
     width: 100%;
     position: relative;
+  }
+  .send img {
     left:-2px;
+  }
+  .close img {
+    width: 40% !important;
+    left: 0.25px;
+    top: 2px;
   }
   textarea {
     resize: none;
