@@ -46,6 +46,7 @@
   .question {
     width: 90vw;
     height: 300px;
+    z-index: -10;
     left: 5%;
     top: calc(5% + 3rem);
     overflow-wrap: break-word;

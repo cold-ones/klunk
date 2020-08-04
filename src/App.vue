@@ -77,8 +77,7 @@ export default {
           }
           drag = false;
         }
-
-        s.background(16);
+        s.clear();
         s.fill(222,56,200);
         let d = new Date();
         for (let i=0; i<s.width; i++) {
