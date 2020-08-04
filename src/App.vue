@@ -114,6 +114,7 @@ export default {
             for (let i=0; i<s.width; i++) {
               oy[i] = s.height;
             }
+            break;
           }
 
           s.rect(i,y,1,ebic);
