@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="canvas"></div>
+    <h1 v-if="! roomCode">dricka.</h1>
     <Menu v-if="! roomCode" :host.sync="host" :socket="socket" />
     <Game v-else :roomCode="roomCode" :host="host" :socket="socket" @question="pepo.lol()" />
   </div>
@@ -13,6 +14,15 @@
     position: absolute;
     top: 0;
     left: 0;
+  } 
+  h1 {
+    display: inline-block;
+    position: fixed;
+    left: 5%;
+    top: calc(5% + 1em);
+    font-size: 3em;
+    font-weight: 600;
+    color:white;
   }
 </style>
 

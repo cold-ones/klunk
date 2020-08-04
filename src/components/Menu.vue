@@ -1,6 +1,5 @@
 <template>
   <div class="daddy">
-    <h1>dricka.</h1>
     <button class="btn" @click="create">Nytt spel</button>
     <div class="join">
       <div class="container-4">
@@ -12,15 +11,6 @@
 </template>
 
 <style scoped>
-  h1 {
-    display: inline-block;
-    position: absolute;
-    left: 5%;
-    bottom: calc(45vh - 150px);
-    font-size: 3em;
-    font-weight: 600;
-    color:white;
-  }
   .btn {
     font-size: 1.5em;
     font-weight: 600;
