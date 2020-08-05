@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="canvas"></div>
-    <h1 v-if="! roomCode">dricka.</h1>
+    <h1 v-if="! roomCode">{{ title }}</h1>
     <Menu v-if="! roomCode" :host.sync="host" :socket="socket" />
     <Game v-else :roomCode="roomCode" :host="host" :socket="socket" @question="pepo.lol()" />
   </div>
@@ -29,7 +29,10 @@
 <script>
 import P5 from 'p5';
 import io from "socket.io-client";
-const socket = io("fredag.nu:3000");
+
+var ip = process.env.VUE_APP_IP || '127.0.0.1';
+var port = process.env.VUE_APP_PORT || '3000';
+const socket = io(`${ip}:${port}`);
 
 import Menu from "@/components/Menu.vue";
 import Game from "@/components/Game.vue";
@@ -42,6 +45,11 @@ export default {
       pepo: null,
       host: false,
     };
+  },
+  computed: {
+    title() {
+      return process.env.VUE_APP_TITLE || 'läs README.md';
+    }
   },
   created() {
     const sketch = (s) => {
