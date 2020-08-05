@@ -121,14 +121,16 @@ export default {
       this.$emit('question');
       setTimeout(() => {
         this.question = "";
-        this.$nextTick(() => { this.question = question; })
+        this.type = "";
+        this.$nextTick(() => { this.question = question.text; })
+        this.$nextTick(() => { this.type = question.type; })
       }, 200);
     });
   },
   data () {
     return {
       question: '',
-      type: 'pekleken.',
+      type: '',
       essay: '',
       edit: false,
     };
