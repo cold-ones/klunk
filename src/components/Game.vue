@@ -55,6 +55,9 @@
     overflow-wrap: break-word;
     color: #DE38C8;
   }
+  .question::after{
+    content: '.';
+  }
   .type {
     display: inline-block;
     left: 5%;
