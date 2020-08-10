@@ -28,11 +28,6 @@
 
 <script>
 import P5 from 'p5';
-import io from "socket.io-client";
-
-var ip = process.env.VUE_APP_IP || '127.0.0.1';
-var port = process.env.VUE_APP_PORT || '3000';
-const socket = io(`${ip}:${port}`);
 
 import Menu from "@/components/Menu.vue";
 import Game from "@/components/Game.vue";
@@ -41,7 +36,6 @@ export default {
   data() {
     return {
       roomCode: "",
-      socket: socket,
       pepo: null,
       host: false,
     };
@@ -49,6 +43,9 @@ export default {
   computed: {
     title() {
       return process.env.VUE_APP_TITLE || 'läs README.md';
+    },
+    socket() {
+      return this.$store.state.socket;
     }
   },
   created() {
@@ -142,13 +139,13 @@ export default {
 
     this.pepo = new P5(sketch, "canvas");
 
-    socket.on("init", (roomCode) => {
+    this.socket.on("init", (roomCode) => {
       this.roomCode = roomCode;
     });
-    socket.on("host", () => {
+    this.socket.on("host", () => {
       this.host = true;
     });
-    socket.on("empty", () => {
+    this.socket.on("empty", () => {
       alert("rummet finns inte :(");
     });
   },
