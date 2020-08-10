@@ -38,20 +38,30 @@
 
 <script>
 export default {
-  props: ['host','socket'],
   data () {
     return {
       roomCode: '',
     };
   },
+  computed: {
+    socket() {
+      return this.$store.state.socket;
+    },
+  },
+  created () {
+    this.socket.on("init", (roomCode) => {
+      this.$router.push({
+        name: 'Game',
+        params: { room: roomCode }
+      });
+     });
+  },
   methods: {
     create () {
-      this.$emit('update:host', true)
       this.socket.emit("create");
+      this.$store.state.host = true;
     },
-    join () {
-      this.socket.emit("join", this.roomCode);
-    }
+    join () { this.socket.emit("join", this.roomCode); },
   },
   watch: {
     roomCode(val) {

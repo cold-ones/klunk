@@ -9,6 +9,7 @@
       <br>
       <button class="send" @click="send" :style="sendButton"><img src="@/assets/send.svg"/></button>
     </div>
+    <button @click="next" v-if="host">next</button>
     <h2 class="swipe" v-if="host">Swipea up för frågor.</h2>
   </div>
 </template>
@@ -118,10 +119,10 @@
 
 <script>
 export default {
-  props: ['socket', 'host', 'roomCode'],
   created() {
+    this.socket.emit("join", this.roomCode);
+
     this.socket.on('question', (question) => {
-      this.$emit('question');
       setTimeout(() => {
         this.question = "";
         this.type = "";
@@ -148,6 +149,15 @@ export default {
     }
   },
   computed: {
+    roomCode() {
+      return this.$route.params.room;
+    },
+    socket() {
+      return this.$store.state.socket;
+    },
+    host() {
+      return this.$store.state.host;
+    },
     hiddenText() {
       return this.edit || { padding: 0, height: 0, width: 0 };
     },
