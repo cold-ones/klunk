@@ -26,7 +26,9 @@ export default {
     });
     this.socket.on("empty", () => {
       alert("rummet finns inte :(");
-      this.$router.push("/");
+      if (this.$router.path !== "/") {
+        this.$router.push("/");
+      }
     });
   },
 };
