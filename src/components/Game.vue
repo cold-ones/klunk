@@ -125,8 +125,10 @@ export default {
       setTimeout(() => {
         this.question = "";
         this.type = "";
-        this.$nextTick(() => { this.question = question.text; })
-        this.$nextTick(() => { this.type = question.type; })
+        this.$nextTick(() => {
+          this.question = question.text;
+          this.type = question.type;
+        });
       }, 200);
     });
   },
