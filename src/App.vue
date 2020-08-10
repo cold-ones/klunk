@@ -2,8 +2,8 @@
   <div id="app">
     <div id="canvas"></div>
     <h1 v-if="! roomCode">{{ title }}</h1>
-    <Menu v-if="! roomCode" :host.sync="host" :socket="this.socket" />
-    <Game v-else :roomCode="roomCode" :host="host" :socket="this.socket" @question="pepo.lol()" />
+    <Menu v-if="! roomCode" :host.sync="host" :socket="socket" />
+    <Game v-else :roomCode="roomCode" :host="host" :socket="socket" @question="pepo.lol()" />
   </div>
 </template>
 
