@@ -19,5 +19,5 @@ const store = new Vuex.Store({
     actions: {},
     mutations: {}
 
-})
+});
 export default store;
