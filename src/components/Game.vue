@@ -9,7 +9,6 @@
       <br>
       <button class="send" @click="send" :style="sendButton"><img src="@/assets/send.svg"/></button>
     </div>
-    <button @click="next" v-if="host">next</button>
     <h2 class="swipe" v-if="host">Swipea up för frågor.</h2>
   </div>
 </template>
@@ -20,7 +19,7 @@
     padding: 0;
     width: 100vw;
     text-align: center;
-    color: rgb(16,16,16);
+    color: #fff;
     bottom:10%;
     left:0;
     transform: translateY(50%);
@@ -54,7 +53,7 @@
     top: 40%;
     transform: translateY(-50%);
     overflow-wrap: break-word;
-    color: #DE38C8;
+    color: #fff;
   }
   .question::after{
     content: '.';
@@ -65,7 +64,7 @@
     top: calc(5% + 1em);
     font-size: 3em;
     font-weight: 600;
-    color: #DE38C8;
+    color: #fff;
   }
   button {
     border: none;
