@@ -42,27 +42,25 @@
     color:#fff;
   }
   .roomCode {
-    left: 5%;
-    top: 5%;
+    left: 10%;
+    top: 10%;
+    font-size: 1.7em;
     color:#aaa;
   }
   .question {
-    width: 90vw;
+    width: 80vw;
     z-index: -10;
-    left: 5%;
+    left: 10%;
     top: 40%;
     transform: translateY(-50%);
     overflow-wrap: break-word;
     color: #fff;
   }
-  .question::after{
-    content: '.';
-  }
   .type {
     display: inline-block;
-    left: 5%;
-    top: calc(5% + 1em);
-    font-size: 3em;
+    left: 10%;
+    top: 0.5em;
+    font-size: 2.5em;
     font-weight: 600;
     color: #fff;
   }
@@ -122,6 +120,7 @@ export default {
     this.socket.emit("join", this.roomCode);
 
     this.socket.on('question', (question) => {
+      this.$store.state.animate();
       setTimeout(() => {
         this.question = "";
         this.type = "";
@@ -129,13 +128,13 @@ export default {
           this.question = question.text;
           this.type = question.type;
         });
-      }, 200);
+      }, 400);
     });
   },
   data () {
     return {
       question: '',
-      type: '',
+      type: process.env.VUE_APP_TITLE,
       essay: '',
       edit: false,
     };
@@ -174,9 +173,6 @@ export default {
     }
   },
   methods: {
-    next () {
-      this.socket.emit("next");
-    },
     send () {
       var trimmed = this.essay.replace(/\s+/g, '')
       if (trimmed.length > 0) {

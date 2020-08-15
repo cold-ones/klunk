@@ -1,10 +1,13 @@
 <template>
-  <div class="daddy">
-    <button class="btn" @click="create">Nytt spel</button>
-    <div class="join">
-      <div class="container-4">
-        <input v-model="roomCode" maxlength="3" placeholder="#AAA" id="search" type="search"/>
-        <button @click="join" class="icon">Delta</button>
+  <div>
+    <h1 class="title">{{ title }}</h1>
+    <div ref="test" class="daddy">
+      <button class="btn" @click="create">Nytt spel</button>
+      <div class="join">
+        <div class="container-4">
+          <input v-model="roomCode" maxlength="3" placeholder="#AAA" id="search" type="search"/>
+          <button @click="join" class="icon">Delta</button>
+        </div>
       </div>
     </div>
   </div>
@@ -34,6 +37,21 @@
     width: 100%;
     text-align: center;
   }
+  h1 {
+    text-align: left;
+    position: fixed;
+    font-size: 2em;
+    font-weight: 600;
+    color:#fff;
+  }
+  .title {
+    display: inline-block;
+    left: 10%;
+    top: 0.5em;
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #fff;
+  }
 </style>
 
 <script>
@@ -44,21 +62,28 @@ export default {
     };
   },
   computed: {
+    title() {
+      return process.env.VUE_APP_TITLE || 'läs README.md';
+    },
     socket() {
       return this.$store.state.socket;
     },
   },
   created () {
     this.socket.on("init", (roomCode) => {
-      this.$router.push({
-        name: 'Game',
-        params: { room: roomCode }
-      });
+      setTimeout(() => {
+        this.$router.push({
+          name: 'Game',
+          params: { room: roomCode }
+        });
+      }, 500);
      });
   },
   methods: {
     create () {
+      console.log(this.$refs.test.style.zIndex = "-10");
       this.socket.emit("create");
+      this.$store.state.animate();
       this.$store.state.host = true;
     },
     join () { this.socket.emit("join", this.roomCode); },
