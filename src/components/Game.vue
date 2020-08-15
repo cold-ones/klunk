@@ -9,7 +9,6 @@
       <br>
       <button class="send" @click="send" :style="sendButton"><img src="@/assets/send.svg"/></button>
     </div>
-    <button @click="next" v-if="host">next</button>
     <h2 class="swipe" v-if="host">Swipea up för frågor.</h2>
   </div>
 </template>
@@ -20,7 +19,7 @@
     padding: 0;
     width: 100vw;
     text-align: center;
-    color: rgb(16,16,16);
+    color: #fff;
     bottom:10%;
     left:0;
     transform: translateY(50%);
@@ -43,29 +42,27 @@
     color:#fff;
   }
   .roomCode {
-    left: 5%;
-    top: 5%;
+    left: 10%;
+    top: 10%;
+    font-size: 1.7em;
     color:#aaa;
   }
   .question {
-    width: 90vw;
+    width: 80vw;
     z-index: -10;
-    left: 5%;
+    left: 10%;
     top: 40%;
     transform: translateY(-50%);
     overflow-wrap: break-word;
-    color: #DE38C8;
-  }
-  .question::after{
-    content: '.';
+    color: #fff;
   }
   .type {
     display: inline-block;
-    left: 5%;
-    top: calc(5% + 1em);
-    font-size: 3em;
+    left: 10%;
+    top: 0.5em;
+    font-size: 2.5em;
     font-weight: 600;
-    color: #DE38C8;
+    color: #fff;
   }
   button {
     border: none;
@@ -123,6 +120,7 @@ export default {
     this.socket.emit("join", this.roomCode);
 
     this.socket.on('question', (question) => {
+      this.$store.state.animate();
       setTimeout(() => {
         this.question = "";
         this.type = "";
@@ -130,13 +128,13 @@ export default {
           this.question = question.text;
           this.type = question.type;
         });
-      }, 200);
+      }, 400);
     });
   },
   data () {
     return {
       question: '',
-      type: '',
+      type: process.env.VUE_APP_TITLE,
       essay: '',
       edit: false,
     };
@@ -175,9 +173,6 @@ export default {
     }
   },
   methods: {
-    next () {
-      this.socket.emit("next");
-    },
     send () {
       var trimmed = this.essay.replace(/\s+/g, '')
       if (trimmed.length > 0) {
