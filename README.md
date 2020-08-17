@@ -4,4 +4,3 @@
 2. `npm install`
 3. `npm run serve`
 4. boom smack
-beep
