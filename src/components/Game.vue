@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1 class="roomCode">{{ roomCode }}</h1>
-    <h1 class="type">{{ type }}</h1>
-    <h1 class="question">{{ question }}</h1>
+    <h1 class="type">{{ question.type }}</h1>
+    <h1 class="question">{{ question.text }}</h1>
     <div class="centered" :style="closeCenter">
       <button class="close" @click="edit = !edit; if (edit) { $refs.text.focus() }" :style="closeButton"><img :style="rotateButton" src="@/assets/close.svg"/></button>
       <textarea ref="text" :style="hiddenText" v-model="essay" placeholder="skriv en fråga..."/>
@@ -120,30 +120,35 @@ export default {
     this.socket.emit("join", this.roomCode);
 
     this.socket.on('question', (question) => {
+      if (this.question.id == question.id) 
+        return;
+
       this.$store.state.animate();
       setTimeout(() => {
-        this.question = "";
-        this.type = "";
-        this.$nextTick(() => {
-          this.question = question.text;
-          this.type = question.type;
-        });
+        this.question = { 
+          text:'',
+          type:''
+        };
+        this.$nextTick(() => { this.question = question; });
       }, 400);
     });
   },
   data () {
     return {
-      question: '',
-      type: process.env.VUE_APP_TITLE,
+      question: {
+        id: null,
+        text: '',
+        type: process.env.VUE_APP_TITLE
+      },
       essay: '',
       edit: false,
     };
   },
   mounted () {
     if (this.host) {
-      this.question = "Du äger rummet!";
+      this.question.text = "Du äger rummet!";
     } else {
-      this.question = "Väntar på ägaren av rummet.";
+      this.question.text = "Väntar på ägaren av rummet.";
     }
   },
   computed: {
@@ -186,7 +191,7 @@ export default {
     host: {
       immediate: true, 
       handler () {
-        this.question = "Du äger nu rummet!";
+        this.question.text = "Du äger nu rummet!";
       }
     },
     edit (to) {
