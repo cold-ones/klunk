@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     create () {
-      console.log(this.$refs.test.style.zIndex = "-10");
       this.socket.emit("create");
       this.$store.state.animate();
       this.$store.state.host = true;
