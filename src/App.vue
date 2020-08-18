@@ -39,6 +39,9 @@ export default {
       }
       alert("rummet finns inte :(");
     });
+    this.socket.on('connect_error', () => {
+      alert("spelservern är nere :(");  
+    });
   },
   methods: {
     swipe() { this.socket.emit("next"); },
