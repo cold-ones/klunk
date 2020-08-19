@@ -88,7 +88,11 @@ export default {
     },
   },
   created() {
-    this.socket.emit("admin-auth");
+    this.socket.emit("admin-auth", prompt("Enter password"));
+    this.socket.on("403", () => {
+      this.socket.emit("admin-auth", prompt("Enter password"));
+    });
+
     this.socket.on("admin-questions", (questions) => {
       this.questions = questions.map((question) => {
         return { ...question, edit: false };

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="canvas" />
+    <div v-if="! admin" id="canvas" />
     <router-view />
   </div>
 </template>
@@ -23,12 +23,17 @@ export default {
     host() {
       return this.$store.state.host;
     },
+    admin() {
+      return this.$route.name == 'Admin';
+    }
   },
   created() {
-    this.wave = new P5(wave, "canvas");
-    this.wave.callback = this.swipe;
-    this.wave.locked = this.canSwipe;
-    this.$store.state.animate = this.wave.swipe;
+    if (! this.admin) {
+      this.wave = new P5(wave, "canvas");
+      this.wave.callback = this.swipe;
+      this.wave.locked = this.canSwipe;
+      this.$store.state.animate = this.wave.swipe;
+    }
 
     this.socket.on("host", () => {
       this.$store.state.host = true;
