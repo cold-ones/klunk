@@ -1,7 +1,7 @@
 <template>
   <div class="daddy">
     <div style="margin-bottom:10px;">
-      <input style="width:30vw;" v-model="newQuestion.text" placeholder="add question" />
+      <input style="width:30vw;" v-model="newQuestion.text" @keyup.enter="addQuestion" placeholder="add question" />
       <select v-model="newQuestion.type">
         <option disabled value>Please select one</option>
         <option>jag har aldrig</option>
@@ -57,7 +57,22 @@ export default {
   },
   methods: {
     addQuestion() {
-      this.socket.emit("admin-newQuestion", this.newQuestion);
+      var trimmed = this.newQuestion.text.replace(/\s+/g, '')
+      if (trimmed.length > 0) {
+        this.newQuestion.type = this.newQuestion.type || "pekleken";
+
+        var samesies = this.questions.filter(q => {
+          return q.text.toLowerCase() == this.newQuestion.text.toLowerCase()  
+        });
+
+        if (samesies.length == 0) {
+          this.socket.emit("admin-newQuestion", this.newQuestion);
+        } else {
+          alert("frågan finns redan, retard.");
+        }
+
+        this.newQuestion.text = "";
+      }
     },
     toggleEdit(question) {
       this.cancelEdit(this.questions.find(q => q.edit))
@@ -122,5 +137,6 @@ input {
 }
 .daddy {
   text-align: center;
+  margin-top: 50px;
 }
 </style>
