@@ -9,7 +9,8 @@ var port = process.env.VUE_APP_PORT || '3000';
 
 const store = new Vuex.Store({
     state: {
-        socket: io(`${ip}:${port}`)
+        socket: io(`${ip}:${port}`),
+        host: false,
     },
     getters: {
         socket(state) {
