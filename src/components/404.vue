@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="type">404</h1>
-    <div class="centered" :style="closeCenter">
+    <div class="centered">
       <h1>404</h1>
       <h3>Broken url</h3>
     </div>
