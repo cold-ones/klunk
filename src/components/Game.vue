@@ -8,6 +8,7 @@
       <textarea ref="text" :style="hiddenText" v-model="essay" placeholder="skriv en fråga..."/>
       <br>
       <button class="send" @click="send" :style="sendButton"><img src="@/assets/send.svg"/></button>
+      <button class="settings" @click="settings" :style="settingsButton"><img src="@/assets/cog.svg"/></button>
     </div>
     <h2 class="swipe" v-if="host">Swipea up för frågor.</h2>
   </div>
@@ -80,6 +81,12 @@
     transform: translate(30%, -70%);
     vertical-align: -1px;
     z-index: 0;
+  }
+  .settings {
+    background: #DE38C8;
+    transform: translate(40%, -70%);
+    vertical-align: -1px;
+    z-index: 0;  
   }
   .close { 
     background: #DE38C8;
@@ -173,18 +180,24 @@ export default {
     sendButton() {
       return this.edit || { backgroundColor: "#fff", transform: 'translate(50%, -70%)' };
     },
+    settingsButton() {
+      return this.edit || { backgroundColor: "#fff", transform: 'translate(100%, -70%)' };
+    },
     closeCenter() {
       return this.edit || { top: "70%" };
     }
   },
   methods: {
-    send () {
+    send() {
       var trimmed = this.essay.replace(/\s+/g, '')
       if (trimmed.length > 0) {
         this.socket.emit("push", this.essay);
         this.essay = "";
         this.edit = false;
       } 
+    },
+    settings() {
+      //router.push();
     }
   },
   watch: {
