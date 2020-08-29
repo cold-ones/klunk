@@ -25,7 +25,7 @@
         <button v-if="question.edit==false" @click="toggleEdit(question)">Edit</button>
         <button
           v-if="question.edit==true"
-          @click="toggleEdit(question); commitChange(question)"
+          @click="commitChange(question); toggleEdit(question);"
         >Commit</button>
         <button v-if="question.edit==false" @click="fuckingRemove(question)">Delete</button>
         <button v-if="question.edit==true" @click="cancelEdit(question)">Cancel</button>
