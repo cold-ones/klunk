@@ -5,6 +5,10 @@
     <h1 class="question">{{ question.text }}</h1>
     <div class="centered" :style="closeCenter">
       <button class="close" @click="edit = !edit; if (edit) { $refs.text.focus() }" :style="closeButton"><img :style="rotateButton" src="@/assets/close.svg"/></button>
+      <select v-model="questiontype" :style="hiddenText">
+        <option value="pekleken">Pekleken</option>
+        <option value="jag har aldrig">Jag har aldrig</option>
+      </select>
       <textarea ref="text" :style="hiddenText" v-model="essay" placeholder="skriv en fråga..."/>
       <br>
       <button class="send" @click="send" :style="sendButton"><img src="@/assets/send.svg"/></button>
@@ -141,6 +145,7 @@ export default {
         type: process.env.VUE_APP_TITLE
       },
       essay: '',
+      questiontype: 'pekleken',
       edit: false,
     };
   },
@@ -181,7 +186,7 @@ export default {
     send () {
       var trimmed = this.essay.replace(/\s+/g, '')
       if (trimmed.length > 0) {
-        this.socket.emit("push", this.essay);
+        this.socket.emit("push", { text: this.essay, type: this.questiontype });
         this.essay = "";
         this.edit = false;
       } 

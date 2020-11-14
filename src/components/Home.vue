@@ -5,7 +5,7 @@
       <button class="btn" @click="create">Nytt spel</button>
       <div class="join">
         <div class="container-4">
-          <input v-model="roomCode" maxlength="3" placeholder="#AAA" id="search" type="search"/>
+          <input v-model="roomCode" maxlength="4" placeholder="#AAA" id="search" type="search"/>
           <button @click="join" class="icon">Delta</button>
         </div>
       </div>
@@ -89,7 +89,13 @@ export default {
   },
   watch: {
     roomCode(val) {
-      this.roomCode = val.toUpperCase();
+      this.roomCode = val.toUpperCase().trim();
+      if (this.roomCode.length > 0 && this.roomCode[0] != "#") {
+        this.roomCode = "#" + this.roomCode;
+      }
+      if (this.roomCode.length == 1 && this.roomCode[0] == "#") {
+        this.roomCode = "";
+      }
     }
   }
 }
